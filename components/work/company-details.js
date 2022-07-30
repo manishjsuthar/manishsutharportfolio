@@ -6,7 +6,7 @@ export default function CompanyDetails(props) {
 
   async function getCompaniesDetails() {
     try {
-      const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL+`/api/graphql`, {
+      const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL +`/api/graphql`, {
         "operationName": "Query",
         "query": "query Query($getCompanyId: ID) {getCompany(id: $getCompanyId){id name logo_url featured position startDate endDate responsibilities order } }",
         "variables": {

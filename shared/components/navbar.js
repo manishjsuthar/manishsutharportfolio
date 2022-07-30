@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Menu } from 'react-feather';
@@ -8,7 +8,6 @@ import {logo} from '../../docs/logo-dark.svg'
 
 const NavItem = ({ href, title }) => {
   const router = useRouter();
-  console.log("router.asPath",href)
   return (
     <Link href={href}>
       <a>

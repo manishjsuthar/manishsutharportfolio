@@ -29,8 +29,8 @@ function MyApp({ Component, pageProps, router }) {
       'background: #212121; color: #f69510; padding: 6px;'
     );
 
-    console.log = () => {};
-    console.error = () => {};
+    // console.log = () => {};
+    // console.error = () => {};
   };
   return (
     // <Component {...pageProps} />
