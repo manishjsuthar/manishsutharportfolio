@@ -46,6 +46,15 @@ a {
   background: #525f9e;
 }
 
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
 ::-moz-selection {
   color: #232946;
   background-image: linear-gradient(45deg, #eebbc3, #b8c1ec);

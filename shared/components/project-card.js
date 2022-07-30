@@ -1,6 +1,6 @@
 /* eslint-disable react/require-default-props */
 import Link from 'next/link';
-import Tilt from 'react-tilt';
+import Tilt from 'react-parallax-tilt';
 
 
 const ProjectCard = ({ project, filter }) => {

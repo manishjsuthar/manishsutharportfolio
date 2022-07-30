@@ -8,6 +8,7 @@ import {logo} from '../../docs/logo-dark.svg'
 
 const NavItem = ({ href, title }) => {
   const router = useRouter();
+  console.log("router.asPath",href)
   return (
     <Link href={href}>
       <a>
@@ -34,7 +35,6 @@ const NavItem = ({ href, title }) => {
 };
 
 const Navbar = () => {
-  // const { logo } = useContext(PersonalDetailsContext);
   const [showMobileNav, setShowMobileNav] = useState(false);
   const [isScreenScrolled, setisScreenScrolled] = useState(false);
   const addShadowtoNav = () => {

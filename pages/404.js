@@ -1,4 +1,4 @@
-import { Loader } from '../shared/components/loader';
+import Loader from '../shared/components/loader';
 import dynamic from 'next/dynamic';
 
 const NotFoundPage = dynamic(() => import('../components/notfound/index'), {

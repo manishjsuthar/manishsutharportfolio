@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@graphql-tools/schema": "^8.5.1",
+    "@headlessui/react": "^1.6.6",
     "@popperjs/core": "^2.11.5",
     "apollo-server-micro": "^3.10.0",
     "axios": "^0.27.2",
@@ -19,13 +20,14 @@
     "micro-cors": "^0.1.1",
     "mongoose": "^6.5.0",
     "next": "12.2.3",
+    "nextjs-wordcloud": "^0.1.1",
     "postcss-preset-env": "^7.7.2",
     "react": "18.2.0",
     "react-calendly": "^4.0.1",
     "react-dom": "18.2.0",
     "react-feather": "^2.0.10",
-    "react-tilt": "^0.1.4",
-    "react-wordcloud": "^1.2.7"
+    "react-parallax-tilt": "^1.7.47",
+    "vercel": "^27.3.3"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",

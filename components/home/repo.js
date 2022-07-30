@@ -1,6 +1,6 @@
 import HeaderSmall from '../../shared/components/header-small';
 import { useEffect, useState } from 'react';
-import Tilt from 'react-tilt';
+import Tilt from 'react-parallax-tilt';
 import axios from 'axios'
 
 function Repo(){
