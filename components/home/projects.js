@@ -14,7 +14,7 @@ export default function Projects(){
 
   async function getProjectDetails() {
     try {
-      const response = await axios.post(`/api/graphql`, {
+      const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL+`/api/graphql`, {
         "operationName": "Query",
         "query": "query Query { getAllProjects {id, slug, tagline, description, img, name, tags, github, category, featured} }",
         "variables": {}

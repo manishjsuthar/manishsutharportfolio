@@ -9,7 +9,7 @@ const Landing = () => {
 
   async function getCompaniesDetails() {
     try {
-      const response = await axios.post(`/api/graphql`, {
+      const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL+`/api/graphql`, {
         "operationName": "Query",
         "query": "query Query { getAllCompanies {id name logo_url featured position startDate endDate responsibilities order } }",
         "variables": {}

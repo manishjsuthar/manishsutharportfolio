@@ -4,7 +4,7 @@ import Work from './work';
 import Projects from './projects';
 import Contact from './contact';
 import Repo from './repo'
-// import WordCloud from './wordcloud';
+import WordCloud from './wordcloud';
 
 const HomePage = () => {
   return (
@@ -14,7 +14,7 @@ const HomePage = () => {
           <Landing />
           <Skills />
           <Work />
-          {/* <WordCloud /> */}
+          <WordCloud />
           <Projects />
           <Contact />
           <Repo />

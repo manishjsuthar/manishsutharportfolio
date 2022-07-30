@@ -18,7 +18,7 @@ const ProjectDetail = () => {
 
   async function getProjectDetailsById() {
     try {
-      const response = await axios.post(`/api/graphql`, {
+      const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL+`/api/graphql`, {
           "operationName": "Query",
              "query":
                "query Query($getProjectId: ID) { getProject(id: $getProjectId) { slug, tagline, description, img, name, tags, github, category, featured}}",

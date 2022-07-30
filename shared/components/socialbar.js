@@ -19,7 +19,7 @@ export default function SocialBar() {
 
   async function getMeDetails() {
     try {
-      const response = await axios.post(`/api/graphql`, {
+      const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL+`/api/graphql`, {
         operationName: "Query",
         query:
           "query Query {getMeDetail {id  name  about  logo resume profile_img work { company  designation logo } socialMedia { link image_file alt_text }  }  } ",
