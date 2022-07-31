@@ -13,26 +13,34 @@ export default function Connect({data}) {
 
   const [medata, setmedata] = useState([]);
 
-  // async function getMeDetails() {
-  //   try {
-  //     const response = await axios.post(
-  //       process.env.NEXT_PUBLIC_BASE_URL + "/api/graphql",
-  //       {
-  //         operationName: "Query",
-  //         query:
-  //           "query Query {getMeDetail {id  name  about  logo resume profile_img work { company  designation logo } socialMedia { link image_file alt_text }  }  } ",
-  //         variables: {},
-  //       }
-  //     );
-  //     setmedata(response.data.data.getMeDetail[0].socialMedia);
-  //   } catch (err) {
-  //     console.log("err", err);
-  //     return false;
-  //   }
-  // }
-  // useEffect(() => {
-  //   getMeDetails();
-  // }, []);
+  async function getMeDetails() {
+    // try {
+    //   const response = await axios.post(
+    //     process.env.NEXT_PUBLIC_BASE_URL + "/api/graphql",
+    //     {
+    //       operationName: "Query",
+    //       query:
+    //         "query Query {getMeDetail {id  name  about  logo resume profile_img work { company  designation logo } socialMedia { link image_file alt_text }  }  } ",
+    //       variables: {},
+    //     }
+    //   );
+    //   setmedata(response.data.data.getMeDetail[0].socialMedia);
+    // } catch (err) {
+    //   console.log("err", err);
+    //   return false;
+    // }
+    try {
+      const response = await axios.get("https://jsonplaceholder.typicode.com/posts");
+      // setmedata(response.data.data.getMeDetail[0].socialMedia);
+      console.log(response)
+    } catch (err) {
+      console.log("err", err);
+      return false;
+    }
+  }
+  useEffect(() => {
+    getMeDetails();
+  }, []);
 
   console.log("medata",data);
   async function createContactHandler() {
