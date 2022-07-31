@@ -12,6 +12,7 @@ async function getProjectDetails() {
       "query": "query Query { getAllProjects {id, slug, tagline, description, img, name, tags, github, category, featured} }",
       "variables": {}
   } );
+  console.log("response",response)
   setprojectdata(response.data.data.getAllProjects)
   } catch (err) {
     return false;

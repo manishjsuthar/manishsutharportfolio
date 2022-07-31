@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { Tab } from "@headlessui/react";
 import { Fragment } from "react";
 
-export default function Connect({data}) {
+export default function Connect() {
   const [contactname, setcontactname] = useState("");
   const [contactemail, setcontactemail] = useState("");
   const [contactphone, setcontactphone] = useState("");
@@ -34,7 +34,6 @@ export default function Connect({data}) {
   //   getMeDetails();
   // }, []);
 
-  console.log("medata",data,"sd",{data});
   async function createContactHandler() {
     try {
       const response = await axios.post(
@@ -259,37 +258,24 @@ export default function Connect({data}) {
     </>
   );
 }
-export async function getStaticProps() {
-  // try {
-  //   const response = await axios.post("/api/graphql",
-  //     {
-  //       operationName: "Query",
-  //       query:
-  //         "query Query {getMeDetail {id  name  about  logo resume profile_img work { company  designation logo } socialMedia { link image_file alt_text }  }  } ",
-  //       variables: {},
-  //     }
-  //   );
-  //   return {
-  //     props: {
-  //       data: response,
-  //     },
-  //   }
-  // } catch (err) {
-  //   console.log("err", err);
-  //   return false;
-  // }
-  try {
-    const response = await axios.get("https://jsonplaceholder.typicode.com/posts");
-    // setmedata(response.data.data.getMeDetail[0].socialMedia);
-    const data = response.json()
-        return {
-      props: {
-        data: data,
-      },
-    }
-  } catch (err) {
-    console.log("err", err);
-    return false;
-  }
-}
+// export async function getStaticProps() {
+//   // try {
+//   //   const response = await axios.post("/api/graphql",
+//   //     {
+//   //       operationName: "Query",
+//   //       query:
+//   //         "query Query {getMeDetail {id  name  about  logo resume profile_img work { company  designation logo } socialMedia { link image_file alt_text }  }  } ",
+//   //       variables: {},
+//   //     }
+//   //   );
+//   //   return {
+//   //     props: {
+//   //       data: response,
+//   //     },
+//   //   }
+//   // } catch (err) {
+//   //   console.log("err", err);
+//   //   return false;
+//   // }
+// }
   
