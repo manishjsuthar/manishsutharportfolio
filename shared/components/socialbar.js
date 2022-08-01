@@ -13,11 +13,11 @@ function SocialIcon({ alt_text, image_file, link }) {
   );
 }
 
-export default function SocialBar({personalDetails}) {
+export default function SocialBar({personalDetailsdata}) {
   return (
     <div className="fixed left-3 md:left-5 bottom-0 z-30">
       <div className="flex flex-col  justify-center items-center ">
-        {personalDetails.map((item) => {
+        {personalDetailsdata.map((item) => {
           return (
             <SocialIcon
               link={item.link}
@@ -31,31 +31,4 @@ export default function SocialBar({personalDetails}) {
       </div>
     </div>
   );
-}
-
-
-export async function getStaticProps() {
-  const client = new ApolloClient({
-    uri: `https://manishsuthar.vercel.app/api/graphql`,
-    cache: new InMemoryCache()
-  });
-  const { data } = await client.query({
-    query: gql`
-    query getMeDetail { 
-      getMeDetail {
-        socialMedia {
-          link
-          image_file
-          alt_text
-        }
-    }} 
-    `
-});
-
-return {
-  props: {
-    personalDetails: data.getMeDetail[0].socialMedia
-  },
-  revalidate: 30, // In seconds
-}
 }

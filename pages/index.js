@@ -19,7 +19,7 @@ export default function Home({personalDetails, projectDetails}) {
     <PersonalDetailsContext.Provider value={personalDetails}>
         <ProjectDetailsContext.Provider value={projectDetails}>
           <Navbar />
-          <SocialBar />
+          <SocialBar personalDetailsdata={personalDetails.socialMedia}/>
           <HomePage />
           <Footer />
         </ProjectDetailsContext.Provider>
@@ -35,7 +35,25 @@ export async function getStaticProps() {
   });
   const { data } = await client.query({
     query: gql`
-    query getMeDetail {getMeDetail {id name about}} 
+    query getMeDetail {
+      getMeDetail {
+        id
+          name
+          about
+          work {
+            company
+            designation
+            logo
+          }
+          logo
+          resume
+          profile_img
+          socialMedia {
+            link
+            image_file
+            alt_text
+          }
+      }} 
     `
 });
 

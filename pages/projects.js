@@ -21,7 +21,7 @@ const Projects = ({ personalDetails, projectDetails }) => {
         <ProjectDetailsContext.Provider value={projectDetails}>
           <Navbar />
           <ProjectsPage />
-          <SocialBar />
+          <SocialBar personalDetailsdata={personalDetails.socialMedia} />
           <Footer />
         </ProjectDetailsContext.Provider>
       </PersonalDetailsContext.Provider>

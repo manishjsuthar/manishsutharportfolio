@@ -58,7 +58,7 @@ export default function Connect() {
                 call with me via Google meet.{" "}
               </p>{" "}
               <div className="flex flex-row justify-center lg:justify-start items-end">
-                {socialMedia.map(({ alt_text, image_file, link }) => {
+                {socialMedia.socialMedia.map(({ alt_text, image_file, link }) => {
                   return (
                     <a href={link} key={link}>
                       <img
