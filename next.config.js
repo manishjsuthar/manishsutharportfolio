@@ -2,12 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  serverless: true
 }
 
 module.exports = nextConfig
 
 
-module.exports = {
-  distDir: 'out',
-}
+// module.exports = {
+//   distDir: 'out',
+// }
