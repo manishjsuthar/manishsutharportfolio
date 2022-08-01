@@ -7,30 +7,33 @@ const resolvers = {
   Query: {
     hello: () => "Hello world",
     getAllProjects: async () => {
-      const getprojects = await Projects.find();
+        const getprojects = await Projects.find();
       return getprojects;
     },
     async getProject(_, { id }) {
-      return await Projects.findById(id);
+        const getProjectJson = await Projects.findById(id);
+     return getProjectJson
     },
     getAllCompanies: async () => {
         const getcompanies = await Companies.find();
-        return getcompanies;
+      return getcompanies;
     },
     async getCompany(_, { id }) {
-    return await Companies.findById(id);
+        const getcompany = await Companies.findById(id);
+      return getcompany
     },
     getMeDetail: async () => {
-        const getMe = await MeDetails.find();
-        return getMe;
+        const getMeRes = await MeDetails.find();
+      return getMeRes;
     },
     getAllContacts: async () => {
         const getcon = await ContactForm.find()
-        return getcon;
+      return getcon;
     },
      async getContact(_, { id }) {
-        return await ContactForm.findById(id);
-        },
+        const getcontact = await ContactForm.findById(id)
+      return getcontact;
+    },
   },
   Mutation: {
     async createProject(parent, { project }, context, info) {

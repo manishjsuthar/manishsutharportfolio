@@ -1,5 +1,6 @@
 import HeaderSmall from '../../shared/components/header-small';
 import Link from 'next/link';
+import Image from 'next/image'
 
 export default function Work() {
   return (

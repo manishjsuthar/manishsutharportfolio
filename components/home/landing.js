@@ -2,9 +2,11 @@ import  Button from '../../shared/components/buttons';
 import HeaderSmall from '../../shared/components/header-small';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import axios from 'axios'
 import Loader from '../../shared/components/loader';
+import { PersonalDetailsContext } from '../../shared/utils/contexts';
+import Image from 'next/image'
 
 export default function Landing() {
   const config = {
@@ -14,31 +16,35 @@ export default function Landing() {
   };
   const router = useRouter();
 
-  const [medata, setmedata] = useState([]);
+  const personalDetails = useContext(PersonalDetailsContext);
 
-  async function getMeDetails() {
-    try {
-      const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL+`/api/graphql`, {
-        operationName: "Query",
-        query:
-          "query Query {getMeDetail {id  name  about  logo resume profile_img work { company  designation logo } socialMedia { link image_file alt_text }  }  } ",
-        variables: {},
-      });
-      setmedata(response.data.data.getMeDetail[0]);
-    } catch (err) {
-      return false;
-    }
-  }
-  useEffect(() => {
-    getMeDetails();
-  }, []);
-  if(!medata){
-    return (
-      <>
-      <Loader/>
-      </>
-    )
-  }
+  console.log("data",personalDetails)
+
+  // const [medata, setmedata] = useState([]);
+
+  // async function getMeDetails() {
+  //   try {
+  //     const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL+`/api/graphql`, {
+  //       operationName: "Query",
+  //       query:
+  //         "query Query {getMeDetail {id  name  about  logo resume profile_img work { company  designation logo } socialMedia { link image_file alt_text }  }  } ",
+  //       variables: {},
+  //     });
+  //     setmedata(response.data.data.getMeDetail[0]);
+  //   } catch (err) {
+  //     return false;
+  //   }
+  // }
+  // useEffect(() => {
+  //   getMeDetails();
+  // }, []);
+  // if(!medata){
+  //   return (
+  //     <>
+  //     <Loader/>
+  //     </>
+  //   )
+  // }
   return (
     <>
       <img
@@ -66,10 +72,10 @@ export default function Landing() {
               />
               <HeaderSmall text="Who is he?" />
               <h1 className="text-3xl sm:text-2xl xl:text-1xl font-extrabold text-white leading-none mb-3">
-                {medata.name}
+                {personalDetails.name}
               </h1>
               <h5 className="text-7xl font-light text-violet text-justify">
-                {medata.about}
+                {personalDetails.about}
                 </h5>
               <div className="grid sm:grid-cols-2 md:grid-cols-none xl:grid-cols-2 gap-4 mt-6">
                 <div className="sm:col-span-1 xl:col-span-1">

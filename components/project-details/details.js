@@ -1,4 +1,5 @@
 import {technologies} from '../../shared/utils/constants';
+import Image from 'next/image'
 
 export default function Details({ project }){
   return (

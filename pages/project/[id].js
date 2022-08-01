@@ -16,9 +16,10 @@ const ProjectDetail = () => {
 
   const [project, setProject] = useState("loading");
 
-  async function getProjectDetailsById() {
+  useEffect(() => {
+    async function getProjectDetailsById() {
     try {
-      const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL+`/api/graphql`, {
+      const response = await axios.post(`https://manishsuthar.vercel.app/api/graphql`, {
           "operationName": "Query",
              "query":
                "query Query($getProjectId: ID) { getProject(id: $getProjectId) { slug, tagline, description, img, name, tags, github, category, featured}}",
@@ -31,10 +32,8 @@ const ProjectDetail = () => {
       return false;
     }
   }
-
-  useEffect(() => {
-    getProjectDetailsById();
-  }, []);
+  getProjectDetailsById();
+  }, [id]);
 
   console.log("projectDetails", project);
 

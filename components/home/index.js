@@ -11,7 +11,7 @@ const HomePage = () => {
     <>
       <div className="bg-blue pt-28">
         <div className="overflow-x-hidden">
-          <Landing />
+          <Landing/>
           <Skills />
           <Work />
           <WordCloud />

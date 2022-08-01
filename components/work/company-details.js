@@ -4,7 +4,8 @@ import axios from 'axios'
 export default function CompanyDetails(props) {
   const [companyDetail, setCompanyDetail] = useState();
 
-  async function getCompaniesDetails() {
+  useEffect(() => {
+    async function getCompaniesDetails() {
     try {
       const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL +`/api/graphql`, {
         "operationName": "Query",
@@ -17,11 +18,9 @@ export default function CompanyDetails(props) {
     } catch (err) {
       return false;
     }
-  }
-  
-  useEffect(() => {
+    }
     getCompaniesDetails()
-  }, []);
+  }, [props.activeCompanyId]);
 
   console.log("cid",companyDetail)
   return (

@@ -6,28 +6,31 @@ import  Button from '../../shared/components/buttons';
 import HeaderSmall from '../../shared/components/header-small';
 import ProjectCard from '../../shared/components/project-card';
 import axios from 'axios'
+import Image from 'next/image'
+import { ProjectDetailsContext } from '../../shared/utils/contexts';
 
 export default function Projects(){
   const router = useRouter();
+  const projectDetails = useContext(ProjectDetailsContext);
 
-  const [projectDetail, setprojectDetail] = useState([])
+  // const [projectDetail, setprojectDetail] = useState([])
 
-  async function getProjectDetails() {
-    try {
-      const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL+`/api/graphql`, {
-        "operationName": "Query",
-        "query": "query Query { getAllProjects {id, slug, tagline, description, img, name, tags, github, category, featured} }",
-        "variables": {}
-    } );
-    setprojectDetail(response.data.data.getAllProjects)
-    } catch (err) {
-      return false;
-    }
-  }
+  // async function getProjectDetails() {
+  //   try {
+  //     const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL+`/api/graphql`, {
+  //       "operationName": "Query",
+  //       "query": "query Query { getAllProjects {id, slug, tagline, description, img, name, tags, github, category, featured} }",
+  //       "variables": {}
+  //   } );
+  //   setprojectDetail(response.data.data.getAllProjects)
+  //   } catch (err) {
+  //     return false;
+  //   }
+  // }
   
-  useEffect(() => {
-    getProjectDetails()
-  }, [])
+  // useEffect(() => {
+  //   getProjectDetails()
+  // }, [])
   
   return (
     <>
@@ -96,7 +99,7 @@ export default function Projects(){
         </div>
         <div className="relative h-auto sm:h-auto md:h-auto ml-4 sm:mx-12 md:mx-16" id="projects">
           <div className="grid md:grid-cols-2 gap-4 place-items-center">
-            {projectDetail.map((project) => (
+            {projectDetails.map((project) => (
               <ProjectCard
                 project={project}
                 key={project.slug}

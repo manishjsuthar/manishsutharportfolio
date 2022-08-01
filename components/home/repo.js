@@ -2,6 +2,7 @@ import HeaderSmall from '../../shared/components/header-small';
 import { useEffect, useState } from 'react';
 import Tilt from 'react-parallax-tilt';
 import axios from 'axios'
+import Image from 'next/image'
 
 function Repo(){
   const [repoData, setRepoData] = useState();

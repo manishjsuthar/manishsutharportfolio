@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import Details from './details';
 import { useState, useEffect } from 'react';
 import axios from 'axios'
+import Image from 'next/image'
 
 const Landing = () => {
   const [companiesdata, setcompaniesdata] = useState([])

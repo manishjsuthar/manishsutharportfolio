@@ -1,5 +1,6 @@
 import HeaderSmall from '../../shared/components/header-small';
 import SkillsIcons from './skills-icon';
+import Image from 'next/image'
 
 export default function Skills() {
   return (

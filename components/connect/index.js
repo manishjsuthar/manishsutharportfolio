@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { Tab } from "@headlessui/react";
 import { Fragment } from "react";
 
-export default function Connect() {
+export default function Connect({data}) {
   const [contactname, setcontactname] = useState("");
   const [contactemail, setcontactemail] = useState("");
   const [contactphone, setcontactphone] = useState("");
@@ -14,26 +14,27 @@ export default function Connect() {
   const [medata, setmedata] = useState([]);
 
   // async function getMeDetails() {
-  //   // try {
-  //   //   const response = await axios.post(
-  //   //     process.env.NEXT_PUBLIC_BASE_URL + "/api/graphql",
-  //   //     {
-  //   //       operationName: "Query",
-  //   //       query:
-  //   //         "query Query {getMeDetail {id  name  about  logo resume profile_img work { company  designation logo } socialMedia { link image_file alt_text }  }  } ",
-  //   //       variables: {},
-  //   //     }
-  //   //   );
-  //   //   setmedata(response.data.data.getMeDetail[0].socialMedia);
-  //   // } catch (err) {
-  //   //   console.log("err", err);
-  //   //   return false;
-  //   // }
+  //   try {
+  //     const response = await axios.post(
+  //       process.env.NEXT_PUBLIC_BASE_URL + "/api/graphql",
+  //       {
+  //         operationName: "Query",
+  //         query:
+  //           "query Query {getMeDetail {id  name  about  logo resume profile_img work { company  designation logo } socialMedia { link image_file alt_text }  }  } ",
+  //         variables: {},
+  //       }
+  //     );
+  //     setmedata(response.data.data.getMeDetail[0].socialMedia);
+  //   } catch (err) {
+  //     console.log("err", err);
+  //     return false;
+  //   }
   // }
   // useEffect(() => {
   //   getMeDetails();
   // }, []);
 
+  console.log("data",data)
   async function createContactHandler() {
     try {
       const response = await axios.post(
@@ -258,24 +259,26 @@ export default function Connect() {
     </>
   );
 }
-// export async function getStaticProps() {
-//   // try {
-//   //   const response = await axios.post("/api/graphql",
-//   //     {
-//   //       operationName: "Query",
-//   //       query:
-//   //         "query Query {getMeDetail {id  name  about  logo resume profile_img work { company  designation logo } socialMedia { link image_file alt_text }  }  } ",
-//   //       variables: {},
-//   //     }
-//   //   );
-//   //   return {
-//   //     props: {
-//   //       data: response,
-//   //     },
-//   //   }
-//   // } catch (err) {
-//   //   console.log("err", err);
-//   //   return false;
-//   // }
-// }
+export async function getServerSideProps() {
+  try {
+    // const response = await axios.post("/api/graphql",
+    //   {
+    //     operationName: "Query",
+    //     query:
+    //       "query Query {getMeDetail {id  name  about  logo resume profile_img work { company  designation logo } socialMedia { link image_file alt_text }  }  } ",
+    //     variables: {},
+    //   }
+    // );
+    const response = await axios.get("https://dummyjson.com/products/1")
+    const data = await response.json()
+    return {
+      props: {
+        data,
+      },
+    }
+  } catch (err) {
+    console.log("err", err);
+    return false;
+  }
+}
   

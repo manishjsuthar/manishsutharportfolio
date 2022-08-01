@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps, router }) {
 
   useEffect(() => {
     setLoading(false);
-  });
+  },[]);
   const spring = {
     type: 'spring',
     damping: 20,
@@ -122,7 +122,7 @@ function MyApp({ Component, pageProps, router }) {
           <CookieAlert />
         </AnimatePresence>
       )}
-      {disableConsole()}
+      {/* {disableConsole()} */}
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import SKILLS from '../../shared/utils/skills';
+import Image from 'next/image'
 
 export default function SkillsIcons() {
   return (

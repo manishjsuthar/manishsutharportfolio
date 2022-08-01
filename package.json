@@ -6,9 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "export": "next export",
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install -f && npm run build && npm run dev",
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.9",
     "@graphql-tools/schema": "^8.5.1",
     "@headlessui/react": "^1.6.6",
     "@popperjs/core": "^2.11.5",

@@ -1,5 +1,6 @@
 import Button from '../../shared/components/buttons';
 import Tilt from 'react-parallax-tilt';
+import Image from 'next/image'
 
 export default function Landing({ project }) {
   return (
