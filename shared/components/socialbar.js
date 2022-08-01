@@ -1,5 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
-import axios from 'axios'
+import {ApolloClient, InMemoryCache, gql} from '@apollo/client';
 
 
 function SocialIcon({ alt_text, image_file, link }) {
@@ -14,30 +13,11 @@ function SocialIcon({ alt_text, image_file, link }) {
   );
 }
 
-export default function SocialBar() {
-  const [medata, setmedata] = useState([]);
-
-  async function getMeDetails() {
-    try {
-      const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL+`/api/graphql`, {
-        operationName: "Query",
-        query:
-          "query Query {getMeDetail {id  name  about  logo resume profile_img work { company  designation logo } socialMedia { link image_file alt_text }  }  } ",
-        variables: {},
-      });
-      setmedata(response.data.data.getMeDetail[0].socialMedia);
-    } catch (err) {
-      return false;
-    }
-  }
-
-  useEffect(() => {
-    getMeDetails();
-  }, []);
+export default function SocialBar({personalDetails}) {
   return (
     <div className="fixed left-3 md:left-5 bottom-0 z-30">
       <div className="flex flex-col  justify-center items-center ">
-        {medata.map((item) => {
+        {personalDetails.map((item) => {
           return (
             <SocialIcon
               link={item.link}
@@ -51,4 +31,31 @@ export default function SocialBar() {
       </div>
     </div>
   );
+}
+
+
+export async function getStaticProps() {
+  const client = new ApolloClient({
+    uri: `https://manishsuthar.vercel.app/api/graphql`,
+    cache: new InMemoryCache()
+  });
+  const { data } = await client.query({
+    query: gql`
+    query getMeDetail { 
+      getMeDetail {
+        socialMedia {
+          link
+          image_file
+          alt_text
+        }
+    }} 
+    `
+});
+
+return {
+  props: {
+    personalDetails: data.getMeDetail[0].socialMedia
+  },
+  revalidate: 30, // In seconds
+}
 }

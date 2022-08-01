@@ -4,37 +4,16 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Tab } from "@headlessui/react";
 import { Fragment } from "react";
+import {PersonalDetailsContext} from '../../shared/utils/contexts'
 
-export default function Connect({data}) {
+export default function Connect() {
   const [contactname, setcontactname] = useState("");
   const [contactemail, setcontactemail] = useState("");
   const [contactphone, setcontactphone] = useState("");
   const [contactmessage, setcontactmessage] = useState("");
 
-  const [medata, setmedata] = useState([]);
+  const {socialMedia } = useContext(PersonalDetailsContext);
 
-  // async function getMeDetails() {
-  //   try {
-  //     const response = await axios.post(
-  //       process.env.NEXT_PUBLIC_BASE_URL + "/api/graphql",
-  //       {
-  //         operationName: "Query",
-  //         query:
-  //           "query Query {getMeDetail {id  name  about  logo resume profile_img work { company  designation logo } socialMedia { link image_file alt_text }  }  } ",
-  //         variables: {},
-  //       }
-  //     );
-  //     setmedata(response.data.data.getMeDetail[0].socialMedia);
-  //   } catch (err) {
-  //     console.log("err", err);
-  //     return false;
-  //   }
-  // }
-  // useEffect(() => {
-  //   getMeDetails();
-  // }, []);
-
-  console.log("data",data)
   async function createContactHandler() {
     try {
       const response = await axios.post(
@@ -79,8 +58,7 @@ export default function Connect({data}) {
                 call with me via Google meet.{" "}
               </p>{" "}
               <div className="flex flex-row justify-center lg:justify-start items-end">
-                {" "}
-                {/* {medata.map(({ alt_text, image_file, link }) => {
+                {socialMedia.map(({ alt_text, image_file, link }) => {
                   return (
                     <a href={link} key={link}>
                       <img
@@ -90,10 +68,10 @@ export default function Connect({data}) {
                       />
                     </a>
                   );
-                })} */}
-              </div>{" "}
-            </div>{" "}
-          </div>{" "}
+                })}
+              </div>
+            </div>
+          </div>
           <div className="ml-auto w-full px-4 lg:mr-20 lg:w-5/12 h-auto align-items: center; mt-10 lg:mt-15 ">
             <>
               <Tab.Group>
@@ -258,27 +236,5 @@ export default function Connect({data}) {
       </div>{" "}
     </>
   );
-}
-export async function getServerSideProps() {
-  try {
-    // const response = await axios.post("/api/graphql",
-    //   {
-    //     operationName: "Query",
-    //     query:
-    //       "query Query {getMeDetail {id  name  about  logo resume profile_img work { company  designation logo } socialMedia { link image_file alt_text }  }  } ",
-    //     variables: {},
-    //   }
-    // );
-    const response = await axios.get("https://dummyjson.com/products/1")
-    const data = await response.json()
-    return {
-      props: {
-        data,
-      },
-    }
-  } catch (err) {
-    console.log("err", err);
-    return false;
-  }
 }
   

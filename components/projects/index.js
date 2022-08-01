@@ -1,30 +1,14 @@
 import ProjectCard from '../../shared/components/project-card';
 import { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import axios from 'axios'
+import {ProjectDetailsContext} from '../../shared/utils/contexts'
 
 const ProjectsPage = () => {
-  const [projectdata, setprojectdata] = useState([])
 
-async function getProjectDetails() {
-  try {
-    const response = await axios.post(`/api/graphql`, {
-      "operationName": "Query",
-      "query": "query Query { getAllProjects {id, slug, tagline, description, img, name, tags, github, category, featured} }",
-      "variables": {}
-  } );
-  console.log("response",response)
-  setprojectdata(response.data.data.getAllProjects)
-  } catch (err) {
-    return false;
-  }
-}
-
-useEffect(() => {
-  getProjectDetails()
-}, [])
+  const projects = useContext(ProjectDetailsContext);
 
   const category = [{ value: 'all', label: 'ALL' }];
-  projectdata.forEach((p) =>
+  projects.forEach((p) =>
     p.category.forEach((cat) => {
       if (!category.find((c) => c.value === cat))
         category.push({ value: cat, label: cat.toUpperCase() });
@@ -69,10 +53,10 @@ useEffect(() => {
               </div>
             </div>
             <div className="grid md:grid-cols-2 gap-4 place-items-center">
-              {projectdata.map((project) => (
+              {projects.map((project) => (
                 <ProjectCard
                   project={project}
-                  key={project.id}
+                  key={project.slug}
                   filter={{ key: 'category', value: active }}
                 />
               ))}

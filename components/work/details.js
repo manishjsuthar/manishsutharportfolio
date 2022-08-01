@@ -3,20 +3,21 @@
 
 import { useContext, useEffect, useState } from 'react';
 import CompanyDetails from './company-details';
+import { CompanyDetailsContext } from '../../shared/utils/contexts';
 
-export default function Details(props){
+export default function Details(){
   const [activeIndex, setActiveIndex] = useState(0);
   let numbering = 0;
   useEffect(() => {}, [activeIndex]);
 
-  console.log(props.companiesdata[activeIndex].id)
+  const companyDetails= useContext(CompanyDetailsContext);
 
   return (
     <>
       <div className="ml-4 sm:mx-12 md:mx-16 grid grid-cols-12 gap-4 place-items-center">
         <div className="col-span-12 sm:col-span-6 flex flex-col ">
           <div className="px-10 py-5">
-            {props.companiesdata.map(
+            {companyDetails.map(
               (company, index) => {
                 if (company.featured) {
                   numbering += 1;
@@ -50,7 +51,7 @@ export default function Details(props){
           </div>
         </div>
         <div className="col-span-12 sm:col-span-6 flex flex-col justify-center items-center min-h-full">
-          <CompanyDetails activeCompanyId={props.companiesdata[activeIndex].id} />
+          <CompanyDetails activeCompany={companyDetails[activeIndex]} />
         </div>
       </div>
     </>

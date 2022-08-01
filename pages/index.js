@@ -4,7 +4,6 @@ import Loader from '../shared/components/loader';
 import  Navbar from '../shared/components/navbar';
 import SocialBar  from '../shared/components/socialbar';
 import { PersonalDetailsContext, ProjectDetailsContext } from '../shared/utils/contexts';
-import axios from 'axios'
 import {ApolloClient, InMemoryCache, gql} from '@apollo/client';
 
 const HomePage = dynamic(() => import('../components/home/index')
@@ -15,7 +14,6 @@ const HomePage = dynamic(() => import('../components/home/index')
 );
 
 export default function Home({personalDetails, projectDetails}) {
-  console.log("personalDetails",projectDetails)
   return (
     <>
     <PersonalDetailsContext.Provider value={personalDetails}>
@@ -51,7 +49,7 @@ return {
   props: {
     personalDetails: data.getMeDetail[0], projectDetails: projectData.data.getAllProjects
   },
-  revalidate: 20, // In seconds
+  revalidate: 30, // In seconds
 }
 
 //  async function getPersonalDetails() {
@@ -90,11 +88,3 @@ return {
   //   props:{ personalDetails: personalDetails, projectDetails: projectDetails}
   // } // will be passed to the page component as props
 }
-
-// export async function getStaticProps(){
-//   props: { personalDetails: PersonalDetails; projectDetails: Project[] };
-// }{
-//   const personalDetails = (await getPersonalDetails()) as PersonalDetails;
-//   const projectDetails = (await getProjectDetails()) as Project[];
-//   return { props: { personalDetails, projectDetails } };
-// }

@@ -1,29 +1,13 @@
 import HeaderSmall  from '../../shared/components/header-small';
 import { useContext } from 'react';
 import Details from './details';
-import { useState, useEffect } from 'react';
 import axios from 'axios'
 import Image from 'next/image'
+import { CompanyDetailsContext } from '../../shared/utils/contexts';
 
 const Landing = () => {
-  const [companiesdata, setcompaniesdata] = useState([])
 
-  async function getCompaniesDetails() {
-    try {
-      const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL+`/api/graphql`, {
-        "operationName": "Query",
-        "query": "query Query { getAllCompanies {id name logo_url featured position startDate endDate responsibilities order } }",
-        "variables": {}
-    } );
-    setcompaniesdata(response.data.data.getAllCompanies)
-    } catch (err) {
-      return false;
-    }
-  }
-  
-  useEffect(() => {
-    getCompaniesDetails()
-  }, [])
+  const companyDetails = useContext(CompanyDetailsContext);
   
   return (
     <>
@@ -52,7 +36,7 @@ const Landing = () => {
             </div>
           </div>
           <div className="col-span-12 md:col-span-5 lg:col-span-6 grid grid-cols-3 gap-4 lg:gap-14 my-10 sm:mt-0 items-center">
-            {companiesdata.map(
+            {companyDetails.map(
               (company, index) =>
                 company.logo_url && (
                   <img
@@ -65,10 +49,7 @@ const Landing = () => {
             )}
           </div>
         </div>
-        {companiesdata[0]?
-        <Details companiesdata={companiesdata} />
-        :
-        null}
+        <Details/>
       </div>
     </>
   );
