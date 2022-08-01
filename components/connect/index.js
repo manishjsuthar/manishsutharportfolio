@@ -12,7 +12,7 @@ export default function Connect() {
   const [contactphone, setcontactphone] = useState("");
   const [contactmessage, setcontactmessage] = useState("");
 
-  const {socialMedia } = useContext(PersonalDetailsContext);
+  const socialMedia = useContext(PersonalDetailsContext);
 
   async function createContactHandler() {
     try {
