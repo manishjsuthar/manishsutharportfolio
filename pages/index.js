@@ -50,7 +50,8 @@ const projectData  = await client.query({
 return {
   props: {
     personalDetails: data.getMeDetail[0], projectDetails: projectData.data.getAllProjects
-  }
+  },
+  revalidate: 20, // In seconds
 }
 
 //  async function getPersonalDetails() {
