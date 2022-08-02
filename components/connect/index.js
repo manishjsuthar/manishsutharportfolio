@@ -14,6 +14,36 @@ export default function Connect() {
 
   const socialMedia = useContext(PersonalDetailsContext);
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('Sending')
+
+    let data = {
+      name: contactname,
+      email: contactemail,
+      phone: contactphone,
+      message: contactmessage
+    }
+
+    fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    }).then((res) => {
+        console.log('Response received')
+        if (res.status === 200) {
+            alert('Response succeeded!')
+            setcontactname('')
+            setcontactemail('')
+            setcontactphone('')
+            setcontactmessage('')
+        }
+    })
+  }
+
   async function createContactHandler() {
     try {
       const response = await axios.post(
@@ -121,6 +151,7 @@ export default function Connect() {
                                 value={contactname}
                                 placeholder="Enter Your Name"
                                 aria-label="Full name"
+                                tabIndex={"1"}
                                 onChange={(e) => setcontactname(e.target.value)}
                               />
                               <button
@@ -140,6 +171,7 @@ export default function Connect() {
                                 type="email"
                                 placeholder="company@gmail.com"
                                 aria-label="Email"
+                                tabIndex={"2"}
                                 onChange={(e) =>
                                   setcontactemail(e.target.value)
                                 }
@@ -163,6 +195,7 @@ export default function Connect() {
                                 type="tel"
                                 placeholder="XXXXXXXXXX"
                                 aria-label="phone"
+                                tabIndex={"3"}
                                 onChange={(e) =>
                                   setcontactphone(e.target.value)
                                 }
@@ -185,6 +218,7 @@ export default function Connect() {
                                 type="text"
                                 placeholder="Write your message here..."
                                 aria-label="Message"
+                                tabIndex={"4"}
                                 value={contactmessage}
                                 onChange={(e) =>
                                   setcontactmessage(e.target.value)
@@ -206,7 +240,8 @@ export default function Connect() {
                             <div className="md:w-2/3">
                               <button
                                 className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-md border-4 text-white py-1 px-8 rounded-full"
-                                onClick={createContactHandler}
+                                onClick={(e)=>{handleSubmit(e)}}
+                                tabIndex={"5"}
                                 type="button"
                               >
                                 Send

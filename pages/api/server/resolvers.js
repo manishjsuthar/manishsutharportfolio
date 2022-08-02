@@ -166,11 +166,13 @@ const resolvers = {
       const newContact = new ContactForm({ name, email, phone, message });
 
       const transporter = nodemailer.createTransport({
-        service: "gmail",
+        port: 465,
+        host: "smtp.gmail.com",
         auth: {
           user: process.env.EMAIL,
           pass: process.env.PASS,
         },
+        secure: true,
       });
 
       const mailOption = {
@@ -178,13 +180,13 @@ const resolvers = {
         to: `${process.env.EMAIL}`,
         subject: `New mail from ${email}`,
         text: `
-    ${name} wrote:
-    Phone no.: ${phone}
-    ${message}
-    `,
-      };
+          ${name} wrote:
+          Phone no.: ${phone}
+          ${message}
+          `,
+        };
 
-      transporter.sendMail(mailOption, (err, data) => {
+      await transporter.sendMail(mailOption, (err, data) => {
         if (err) {
           console.log(err);
           res.send("error" + JSON.stringify(err));
