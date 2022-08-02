@@ -56,7 +56,7 @@ const ProjectsPage = () => {
               {projects.map((project) => (
                 <ProjectCard
                   project={project}
-                  key={project.slug}
+                  key={project.id}
                   filter={{ key: 'category', value: active }}
                 />
               ))}

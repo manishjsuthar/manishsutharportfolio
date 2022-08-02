@@ -30,7 +30,7 @@ export default function Work({personalDetails, companyDetails}) {
 
 export async function getStaticProps() {
   const client = new ApolloClient({
-    uri: `https://manishsuthar.vercel.app/api/graphql`,
+    uri: `${process.env.NEXT_PUBLIC_BASE_URL}/api/graphql`,
     cache: new InMemoryCache()
   });
   const { data } = await client.query({
@@ -40,6 +40,19 @@ export async function getStaticProps() {
           id
           name
           about
+          work {
+            company
+            designation
+            logo
+          }
+          logo
+          resume
+          profile_img
+          socialMedia {
+            link
+            image_file
+            alt_text
+          }
         }
       }
     `,
@@ -55,6 +68,6 @@ return {
   props: {
     personalDetails: data.getMeDetail[0], companyDetails: companyData.data.getAllCompanies
   },
-  revalidate: 10, // In seconds
+  revalidate: 20, // In seconds
 } 
 }

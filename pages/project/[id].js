@@ -10,32 +10,35 @@ import ProjectDetailedPage from "../../components/project-details/index";
 import NotFound from "../404";
 import axios from 'axios'
 
-const ProjectDetail = () => {
-  const router = useRouter();
-    const { id } = router.query;
+import { PersonalDetailsContext, ProjectDetailsContext } from '../../shared/utils/contexts';
+import {ApolloClient, InMemoryCache, gql} from '@apollo/client';
 
-  const [project, setProject] = useState("loading");
+const ProjectDetail = ({personalDetails,projectDetails}) => {
+  // const router = useRouter();
+  //   const { id } = router.query;
 
-  useEffect(() => {
-    async function getProjectDetailsById() {
-    try {
-      const response = await axios.post(`https://manishsuthar.vercel.app/api/graphql`, {
-          "operationName": "Query",
-             "query":
-               "query Query($getProjectId: ID) { getProject(id: $getProjectId) { slug, tagline, description, img, name, tags, github, category, featured}}",
-             "variables": {
-                 "getProjectId": id
-             }
-      });
-      setProject(response.data.data.getProject)
-    } catch (err) {
-      return false;
-    }
-  }
-  getProjectDetailsById();
-  }, [id]);
+  // const [project, setProject] = useState("loading");
 
-  console.log("projectDetails", project);
+  // useEffect(() => {
+  //   async function getProjectDetailsById() {
+  //   try {
+  //     const response = await axios.post(`https://manishsuthar.vercel.app/api/graphql`, {
+  //         "operationName": "Query",
+  //            "query":
+  //              "query Query($getProjectId: ID) { getProject(id: $getProjectId) { slug, tagline, description, img, name, tags, github, category, featured}}",
+  //            "variables": {
+  //                "getProjectId": id
+  //            }
+  //     });
+  //     setProject(response.data.data.getProject)
+  //   } catch (err) {
+  //     return false;
+  //   }
+  // }
+  // getProjectDetailsById();
+  // }, [id]);
+
+  console.log("projectDetails", projectDetails);
 
 //   useEffect(() => {
 //     const { slug } = router.query;
@@ -48,16 +51,16 @@ const ProjectDetail = () => {
   }
   return project ? (
     <>
-      {/* <PersonalDetailsContext.Provider value={personalDetails}>
-        <ProjectDetailsContext.Provider value={projectDetails}> */}
+      <PersonalDetailsContext.Provider value={personalDetails}>
+        <ProjectDetailsContext.Provider value={projectDetails}>
       <Navbar />
       <div className="bg-blue pt-28 overflow-x-hidden">
-        <ProjectDetailedPage project={project} />
+        {/* <ProjectDetailedPage project={projectDetails} /> */}
       </div>
-      <SocialBar />
+      <SocialBar personalDetailsdata={personalDetails.socialMedia} />
       <Footer />
-      {/* </ProjectDetailsContext.Provider>
-      </PersonalDetailsContext.Provider> */}
+      </ProjectDetailsContext.Provider>
+      </PersonalDetailsContext.Provider>
     </>
   ) : (
     <NotFound />
@@ -66,19 +69,89 @@ const ProjectDetail = () => {
 
 export default ProjectDetail;
 
+export async function getStaticPaths() {
+  const client = new ApolloClient({
+    uri: `${process.env.NEXT_PUBLIC_BASE_URL}/api/graphql`,
+    cache: new InMemoryCache()
+  });
+
+  const projectData  = await client.query({
+    query: gql`
+    query getAllProjects { getAllProjects {id, slug, tagline, description, img, name, tags, github, category, featured} }
+    `
+  });
+
+  const projectDataArray = projectData.data.getAllProjects
+
+  const paths = projectDataArray.map((product) => ({
+    params: { id: product.id },
+  }))
+
+  return { paths, fallback: false }
+}
+
+export async function getStaticProps({params}) {
+  const client = new ApolloClient({
+    uri: `${process.env.NEXT_PUBLIC_BASE_URL}/api/graphql`,
+    cache: new InMemoryCache()
+  });
+  const { data } = await client.query({
+    query: gql`
+    query getMeDetail {
+      getMeDetail {
+        id
+          name
+          about
+          work {
+            company
+            designation
+            logo
+          }
+          logo
+          resume
+          profile_img
+          socialMedia {
+            link
+            image_file
+            alt_text
+          }
+      }} 
+    `
+});
+
+const projectData  = await client.query({
+  query: gql`
+  query GetProject($getProjectId: ID) {
+    getProject(id: $getProjectId) {
+      id
+      name
+      img
+      slug
+      description
+      tagline
+      tags
+      github
+      category
+      featured
+    }
+  }
+  `,
+  variables: {
+      "getProjectId": params.id
+  }
+});
+
+return {
+  props: {
+    personalDetails: data.getMeDetail[0], projectDetails: projectData
+  },
+  revalidate: 30, // In seconds
+}
+}
+
 // export async function getStaticProps(){
 //   const personalDetails = (await getPersonalDetails()) as PersonalDetails;
 //   const projectDetails = (await getProjectDetails()) as Project[];
 //   return { props: { personalDetails, projectDetails } };
 // }
 
-// export async function getStaticPaths(): Promise<unknown> {
-//   const projectDetails = ((await getProjectDetails()) as Project[]) || [];
-//   const paths = projectDetails.map((p) => {
-//     return { params: { slug: p.slug } };
-//   });
-//   return {
-//     paths,
-//     fallback: false
-//   };
-// }

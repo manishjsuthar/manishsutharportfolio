@@ -30,7 +30,7 @@ export default function Home({personalDetails, projectDetails}) {
 
 export async function getStaticProps() {
   const client = new ApolloClient({
-    uri: `https://manishsuthar.vercel.app/api/graphql`,
+    uri: `${process.env.NEXT_PUBLIC_BASE_URL}/api/graphql`,
     cache: new InMemoryCache()
   });
   const { data } = await client.query({
