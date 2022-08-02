@@ -122,7 +122,7 @@ function MyApp({ Component, pageProps, router }) {
           <CookieAlert />
         </AnimatePresence>
       )}
-      {disableConsole()}
+      {/* {disableConsole()} */}
     </div>
   )
 }

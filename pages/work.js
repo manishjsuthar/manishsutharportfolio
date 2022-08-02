@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import Navbar from "../shared/components/navbar";
 import Loader from "../shared/components/loader";
 import Footer from "../shared/components/footer";
+import SocialBar from "../shared/components/socialbar";
 
 import {
   PersonalDetailsContext,
@@ -21,6 +22,7 @@ export default function Work({personalDetails, companyDetails}) {
         <CompanyDetailsContext.Provider value={companyDetails}>
           <Navbar />
           <WorkPage />
+          <SocialBar personalDetailsdata={personalDetails.socialMedia}/>
           <Footer />
         </CompanyDetailsContext.Provider>
       </PersonalDetailsContext.Provider>

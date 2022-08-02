@@ -11,6 +11,7 @@ export default function Details(){
   useEffect(() => {}, [activeIndex]);
 
   const companyDetails= useContext(CompanyDetailsContext);
+  console.log("companyDetails[activeIndex]",companyDetails[activeIndex])
 
   return (
     <>

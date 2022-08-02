@@ -9,7 +9,6 @@ const WorkPage = () => {
           <Landing />
         </div>
       </div>
-      <SocialBar />
     </>
   );
 };

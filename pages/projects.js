@@ -14,7 +14,7 @@ const ProjectsPage = dynamic(() => import("../components/projects/index"), {
   loading: () => <Loader />,
 });
 
-const Projects = ({ personalDetails, projectDetails }) => {
+const Projects = ({personalDetails, projectDetails }) => {
   return (
     <>
       <PersonalDetailsContext.Provider value={personalDetails}>
@@ -30,7 +30,7 @@ const Projects = ({ personalDetails, projectDetails }) => {
 };
 export default Projects;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const client = new ApolloClient({
     uri: `${process.env.NEXT_PUBLIC_BASE_URL}/api/graphql`,
     cache: new InMemoryCache(),
@@ -84,6 +84,6 @@ export async function getStaticProps() {
       personalDetails: data.getMeDetail[0],
       projectDetails: projectData.data.getAllProjects,
     },
-    revalidate: 20, // In seconds
+    // revalidate: 20, // In seconds
   };
 }
