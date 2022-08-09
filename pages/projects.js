@@ -74,6 +74,7 @@ export async function getServerSideProps() {
           github
           category
           featured
+          url
         }
       }
     `,

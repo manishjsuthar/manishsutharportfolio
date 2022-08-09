@@ -25,7 +25,7 @@ const ProjectDetail = ({ personalDetails }) => {
           {
             operationName: "Query",
             query:
-              "query Query($getProjectId: ID) { getProject(id: $getProjectId) { slug, tagline, description, img, name, tags, github, category, featured}}",
+              "query Query($getProjectId: ID) { getProject(id: $getProjectId) { slug, tagline, description, img, name, tags, github, category, featured, url}}",
             variables: {
               getProjectId: id,
             },
