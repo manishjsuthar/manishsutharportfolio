@@ -17,7 +17,7 @@ const HomePage = () => {
           <WordCloud />
           <Projects />
           <Contact />
-          <Repo />
+          {/* <Repo /> */}
         </div>
       </div>
     </>
