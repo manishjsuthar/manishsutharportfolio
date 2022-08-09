@@ -12,6 +12,7 @@ export  const  typeDefs = gql`
     github: String
     category: [String]
     featured: Boolean
+    url: String
   }
 
   input ProjectInput {
@@ -24,6 +25,7 @@ export  const  typeDefs = gql`
     github: String
     category: [String]
     featured: Boolean
+    url: String
   }
 
   type Company {

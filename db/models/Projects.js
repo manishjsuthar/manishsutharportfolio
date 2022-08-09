@@ -38,7 +38,11 @@ const projectSchema = new Schema({
   featured: {
     type: Boolean,
     required: true,
-  }
+  },
+  url: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports =

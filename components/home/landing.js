@@ -90,7 +90,7 @@ export default function Landing() {
                     type="outlined"
                     text="Download Resume"
                     eslint-disable-next-line no-return-assign
-                    onClickHandler={() => window.open('/resume.pdf', '_blank')}
+                    onClickHandler={() => window.open(`${personalDetails.resume}`, '_blank')}
                   />
                 </div>
               </div>

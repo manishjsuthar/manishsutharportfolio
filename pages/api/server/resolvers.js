@@ -48,6 +48,7 @@ const resolvers = {
         github,
         category,
         featured,
+        url
       } = project;
       const newProject = new Projects({
         slug,
@@ -59,6 +60,7 @@ const resolvers = {
         github,
         category,
         featured,
+        url
       });
       await newProject.save();
       return newProject;
@@ -78,6 +80,7 @@ const resolvers = {
         github,
         category,
         featured,
+        url
       } = project;
       const newProject = await Projects.findByIdAndUpdate(
         id,
@@ -92,6 +95,7 @@ const resolvers = {
             github,
             category,
             featured,
+            url
           },
         },
         {
